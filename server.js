@@ -48,6 +48,15 @@ const DB = {
         INNER JOIN studentattendance.enrollment AS enrollment
             ON teaching.course_id = enrollment.course_id)
         WHERE enrollment.student_id = ?`,
+
+        FIND_STUDENT_NAME: `SELECT student.*, enrollment.*, course.*
+        FROM (studentattendance.student AS student
+        INNER JOIN studentattendance.enrollment AS enrollment
+            ON student.student_id = enrollment.student_id
+        INNER JOIN studentattendance.course AS course
+            ON enrollment.course_id = course.course_id)
+        WHERE student.student_name = ?
+        ORDER BY student.student_id ASC`,
     },
   },
 };
@@ -130,6 +139,25 @@ app.get("/student_schedule", async (req, res) => {
   const { student_id } = req.query;
   const results = await executeQuery(DB.QUERY.JOIN.STUDENT_SCHEDULE, [
     student_id,
+  ]);
+  res.json(results);
+});
+
+app.get("/passivecheck", async (req, res) => {
+  const results = await executeQuery(DB.QUERY.COURSE);
+  res.json(results);
+});
+app.get("/passivecheck_students_list", async (req, res) => {
+  const { course_id } = req.query;
+  const results = await executeQuery(DB.QUERY.JOIN.STUDENT_ENROLLMENT_COURSE, [
+    course_id,
+  ]);
+  res.json(results);
+});
+app.post("/passivecheck_search_studentname", async (req, res) => {
+  const { student_name } = req.body;
+  const results = await executeQuery(DB.QUERY.JOIN.FIND_STUDENT_NAME, [
+    student_name,
   ]);
   res.json(results);
 });
