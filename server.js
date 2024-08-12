@@ -7,7 +7,8 @@ const app = express();
 app.use(
   cors({
     // 프론트엔드 도메인
-    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
+    // origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
