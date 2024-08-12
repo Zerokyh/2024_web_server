@@ -13,9 +13,6 @@ app.use(
   })
 );
 
-// 모든 경로에 대해 OPTIONS 요청 허용
-app.options("*", cors());
-
 app.use(express.json());
 
 const db = mysql.createPool({
@@ -25,7 +22,17 @@ const db = mysql.createPool({
   database: "studentattendance",
 });
 
-const PORT = process.env.PORT | 3306;
+(async () => {
+  try {
+    await db.getConnection();
+    console.log("Connected to the MySQL database.");
+  } catch (err) {
+    console.error("Unable to connect to the MySQL database:", err);
+  }
+})();
+
+const PORT = process.env.PORT || 8000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
