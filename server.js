@@ -6,6 +6,8 @@ const app = express();
 app.use(
   cors({
     origin: "https://orange-pebble-038562e00.5.azurestaticapps.net", // 실제 프론트엔드 도메인
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
   })
 );
 app.use(express.json());
