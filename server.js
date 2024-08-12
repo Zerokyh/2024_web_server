@@ -3,11 +3,7 @@ const mysql = require("mysql2/promise");
 const cors = require("cors");
 
 const app = express();
-app.use(
-  cors({
-    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net", // 프론트엔드 도메인
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 const db = mysql.createPool({
