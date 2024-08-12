@@ -92,7 +92,7 @@ const executeQuery = async (query, params = []) => {
   }
 };
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   console.log("로그인 요청 도착:", req.body);
   const { id, password } = req.body;
   try {
