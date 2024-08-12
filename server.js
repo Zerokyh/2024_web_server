@@ -9,6 +9,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(bodyParser.json());
 
 const db = mysql.createPool({
   host: "studentdb.mysql.database.azure.com",
