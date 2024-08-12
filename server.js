@@ -18,9 +18,6 @@ const db = mysql.createPool({
   user: "zero",
   password: "P@ssw0rd",
   database: "studentattendance",
-  // ssl: {
-  //   rejectUnauthorized: true, // 기본적으로 SSL 인증서를 확인하도록 설정
-  // },
 });
 
 const PORT = 8001;
