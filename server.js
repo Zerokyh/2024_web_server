@@ -3,14 +3,21 @@ const mysql = require("mysql2/promise");
 const cors = require("cors");
 
 const app = express();
+// CORS 설정
 app.use(
   cors({
-    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net", // 실제 프론트엔드 도메인
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
+    // 프론트엔드 도메인
+    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// 모든 경로에 대해 OPTIONS 요청 허용
+app.options("*", cors());
+
 app.use(express.json());
+
 app.use((req, res, next) => {
   res.setHeader("Referrer-Policy", "no-referrer");
   next();
