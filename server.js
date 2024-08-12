@@ -7,12 +7,13 @@ const app = express();
 app.use(
   cors({
     // 프론트엔드 도메인
-    // origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
-    origin: "*",
+    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+// 모든 경로에 대해 OPTIONS 요청 허용
+app.options("*", cors());
 
 app.use(express.json());
 
