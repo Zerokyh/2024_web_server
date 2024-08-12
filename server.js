@@ -9,7 +9,6 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(bodyParser.json());
 
 const db = mysql.createPool({
   host: "studentdb.mysql.database.azure.com",
@@ -18,7 +17,7 @@ const db = mysql.createPool({
   database: "studentattendance",
 });
 
-const PORT = 3306;
+const PORT = process.env.PORT || 8001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
