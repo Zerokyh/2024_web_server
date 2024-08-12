@@ -84,6 +84,7 @@ const executeQuery = async (query, params = []) => {
 };
 
 app.post("/api/login", async (req, res) => {
+  console.log("로그인 요청 도착:", req.body);
   const { id, password } = req.body;
   try {
     const results = await executeQuery(DB.QUERY.USERAUTHENTICATION.LOGIN, [
