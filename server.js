@@ -18,11 +18,6 @@ app.options("*", cors());
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.setHeader("Referrer-Policy", "no-referrer");
-  next();
-});
-
 const db = mysql.createPool({
   host: "studentdb.mysql.database.azure.com",
   user: "zero",
