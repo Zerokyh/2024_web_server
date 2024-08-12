@@ -6,10 +6,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// const db = mysql.createPool({
+//   host: "localhost",
+//   user: "root",
+//   password: "qwer1234",
+//   database: "studentattendance",
+// });
+
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "qwer1234",
+  host: "studentdb.mysql.database.azure.com",
+  user: "zero",
+  password: "P@ssw0rd",
   database: "studentattendance",
 });
 
@@ -49,7 +56,7 @@ const DB = {
             ON teaching.course_id = enrollment.course_id)
         WHERE enrollment.student_id = ?`,
 
-        FIND_STUDENT_NAME: `SELECT student.*, enrollment.*, course.*
+      FIND_STUDENT_NAME: `SELECT student.*, enrollment.*, course.*
         FROM (studentattendance.student AS student
         INNER JOIN studentattendance.enrollment AS enrollment
             ON student.student_id = enrollment.student_id
