@@ -10,6 +10,7 @@ app.use(
     origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
