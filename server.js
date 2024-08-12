@@ -3,15 +3,12 @@ const mysql = require("mysql2/promise");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net", // 프론트엔드 도메인
+  })
+);
 app.use(express.json());
-
-// const db = mysql.createPool({
-//   host: "localhost",
-//   user: "root",
-//   password: "qwer1234",
-//   database: "studentattendance",
-// });
 
 const db = mysql.createPool({
   host: "studentdb.mysql.database.azure.com",
