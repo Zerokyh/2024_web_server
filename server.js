@@ -78,7 +78,7 @@ const executeQuery = async (query, params = []) => {
   }
 };
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { id, password } = req.body;
   try {
     const results = await executeQuery(DB.QUERY.USERAUTHENTICATION.LOGIN, [
@@ -99,7 +99,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile", async (req, res) => {
+app.get("/api/profile", async (req, res) => {
   const { account } = req.query;
   const results = await executeQuery(DB.QUERY.USERAUTHENTICATION.LOGINUSER, [
     account,
@@ -107,7 +107,7 @@ app.get("/profile", async (req, res) => {
   res.json(results);
 });
 
-app.get("/account", async (req, res) => {
+app.get("/api/account", async (req, res) => {
   const { account } = req.query;
   const results = await executeQuery(DB.QUERY.USERAUTHENTICATION.LOGINUSER, [
     account,
@@ -115,7 +115,7 @@ app.get("/account", async (req, res) => {
   res.json(results);
 });
 
-app.post("/account/changepwd", async (req, res) => {
+app.post("/api/account/changepwd", async (req, res) => {
   const { account, newPassword } = req.body;
   try {
     await executeQuery(DB.QUERY.USERAUTHENTICATION.CHANGEPWD, [
@@ -129,12 +129,12 @@ app.post("/account/changepwd", async (req, res) => {
   }
 });
 
-app.get("/course", async (req, res) => {
+app.get("/api/course", async (req, res) => {
   const results = await executeQuery(DB.QUERY.COURSE);
   res.json(results);
 });
 
-app.get("/consulting_students_list", async (req, res) => {
+app.get("/api/consulting_students_list", async (req, res) => {
   const { course_id } = req.query;
   const results = await executeQuery(DB.QUERY.JOIN.STUDENT_ENROLLMENT_COURSE, [
     course_id,
@@ -142,7 +142,7 @@ app.get("/consulting_students_list", async (req, res) => {
   res.json(results);
 });
 
-app.get("/student_schedule", async (req, res) => {
+app.get("/api/student_schedule", async (req, res) => {
   const { student_id } = req.query;
   const results = await executeQuery(DB.QUERY.JOIN.STUDENT_SCHEDULE, [
     student_id,
@@ -150,18 +150,18 @@ app.get("/student_schedule", async (req, res) => {
   res.json(results);
 });
 
-app.get("/passivecheck", async (req, res) => {
+app.get("/api/passivecheck", async (req, res) => {
   const results = await executeQuery(DB.QUERY.COURSE);
   res.json(results);
 });
-app.get("/passivecheck_students_list", async (req, res) => {
+app.get("/api/passivecheck_students_list", async (req, res) => {
   const { course_id } = req.query;
   const results = await executeQuery(DB.QUERY.JOIN.STUDENT_ENROLLMENT_COURSE, [
     course_id,
   ]);
   res.json(results);
 });
-app.post("/passivecheck_search_studentname", async (req, res) => {
+app.post("/api/passivecheck_search_studentname", async (req, res) => {
   const { student_name } = req.body;
   const results = await executeQuery(DB.QUERY.JOIN.FIND_STUDENT_NAME, [
     student_name,
