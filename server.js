@@ -3,18 +3,21 @@ const mysql = require("mysql2/promise");
 const cors = require("cors");
 
 const app = express();
-app.use(
-  cors({
-    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net", // 실제 프론트엔드 도메인
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors());
+// app.use(
+//   cors({
+//     origin: "https://orange-pebble-038562e00.5.azurestaticapps.net", // 실제 프론트엔드 도메인
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type"],
+//   })
+// );
+
 app.use(express.json());
-app.use((req, res, next) => {
-  res.setHeader("Referrer-Policy", "no-referrer");
-  next();
-});
+
+// app.use((req, res, next) => {
+//   res.setHeader("Referrer-Policy", "no-referrer");
+//   next();
+// });
 
 const db = mysql.createPool({
   host: "studentdb.mysql.database.azure.com",
