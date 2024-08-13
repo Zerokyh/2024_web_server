@@ -8,7 +8,7 @@ app.use(
   cors({
     // 프론트엔드 도메인
     origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Content-Length", "Authorization"],
     credentials: true,
