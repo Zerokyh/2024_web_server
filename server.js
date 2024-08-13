@@ -11,7 +11,6 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Content-Length", "Authorization"],
-    credentials: true,
   })
 );
 // 모든 경로에 대해 OPTIONS 요청 허용
