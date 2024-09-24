@@ -47,24 +47,6 @@ const db = mysql.createPool({
   }
 })();
 
-(async () => {
-  try {
-    await db.getConnection();
-    console.log("Connected to the MySQL database.");
-  } catch (err) {
-    console.error("Unable to connect to the MySQL database:", err);
-  }
-})();
-
-(async () => {
-  try {
-    await db.getConnection();
-    console.log("Connected to the MySQL database.");
-  } catch (err) {
-    console.error("Unable to connect to the MySQL database:", err);
-  }
-})();
-
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
