@@ -4,14 +4,45 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
+// CORS 설정
+app.use(
+  cors({
+    // 프론트엔드 도메인
+    origin: "https://orange-pebble-038562e00.5.azurestaticapps.net",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Content-Length", "Authorization"],
+  })
+);
+// 모든 경로에 대해 OPTIONS 요청 허용
+app.options("*", cors());
+
 app.use(express.json());
 
+// Local DB에 연결
+// const db = mysql.createPool({
+//   host: "localhost",
+//   user: "root",
+//   password: "qwer1234",
+//   database: "studentattendance",
+// });
+
+// 배포된 DB서버 연결
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "qwer1234",
+  host: "studentdb.mysql.database.azure.com",
+  user: "zero",
+  password: "P@ssw0rd",
   database: "studentattendance",
 });
+
+(async () => {
+  try {
+    await db.getConnection();
+    console.log("Connected to the MySQL database.");
+  } catch (err) {
+    console.error("Unable to connect to the MySQL database:", err);
+  }
+})();
 
 const PORT = 8001;
 app.listen(PORT, () => {
@@ -49,7 +80,7 @@ const DB = {
             ON teaching.course_id = enrollment.course_id)
         WHERE enrollment.student_id = ?`,
 
-        FIND_STUDENT_NAME: `SELECT student.*, enrollment.*, course.*
+      FIND_STUDENT_NAME: `SELECT student.*, enrollment.*, course.*
         FROM (studentattendance.student AS student
         INNER JOIN studentattendance.enrollment AS enrollment
             ON student.student_id = enrollment.student_id
